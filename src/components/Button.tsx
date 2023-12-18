@@ -14,10 +14,11 @@ export default function Button({
   return (
     <button
       className={`
+      bg-[#635bff]
             ${className}
             p-2
             rounded-md
-            bg-black
+
             text-white
             `}
       type={type}
