@@ -15,11 +15,10 @@ export default function UncontrolledForm() {
       p-4
       mx-auto 
       my-8
-      bg-gray-100
+      bg-gray-50
       rounded-md
       shadow-md
       max-w-md
-      h-64
       "
     >
       <form
@@ -28,12 +27,20 @@ export default function UncontrolledForm() {
       gap-4
       "
       >
-        <Input
-          label="First Name"
-          name="firstName"
-          type="text"
-          placeholder={"First Name"}
-        />
+        <fieldset className="grid gap-4 p-4">
+          <legend className="text-lg font-semibold text-gray-600">
+            Personal Info
+          </legend>
+          <Input label="Name" name="name" />
+          <Input label="Email" name="email" />
+        </fieldset>
+        <fieldset className="grid gap-4 p-4">
+          <legend className="text-lg font-semibold text-gray-600">
+            Contact Info
+          </legend>
+          <Input label="Name" name="name" />
+          <Input label="Email" name="email" />
+        </fieldset>
         <Button type="submit">Submit</Button>
       </form>
     </div>

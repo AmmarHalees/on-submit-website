@@ -16,7 +16,10 @@ export default function Input({
   placeholder?: string;
 }) {
   return (
-    <label htmlFor={name}>
+    <legend>
+      <label htmlFor={name} className="text-sm font-semibold text-gray-600">
+        {label}
+      </label>
       <input
         className="w-full p-2 border border-gray-300 rounded-md"
         type={type}
@@ -25,6 +28,6 @@ export default function Input({
         onChange={onChange ? (e) => onChange(e.target.value) : undefined}
         placeholder={placeholder}
       />
-    </label>
+    </legend>
   );
 }
