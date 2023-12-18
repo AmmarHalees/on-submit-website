@@ -22,7 +22,8 @@ export default function UncontrolledForm() {
   return (
     <div
       className="
-      p-4
+      p-2
+      md:p-4
       mx-auto 
       md:my-8
       bg-gray-50
@@ -85,7 +86,14 @@ export default function UncontrolledForm() {
 
           <Select label="Speciality" name="speciality" />
         </fieldset>
-        <Button type="submit">Submit</Button>
+        <div className="grid gap-2 grid-cols-[1fr_2fr]">
+          <Button type="reset" variant="secondary">
+            Reset
+          </Button>
+          <Button type="submit" variant="primary">
+            Submit
+          </Button>
+        </div>
       </form>
     </div>
   );

@@ -21,15 +21,8 @@ export default function ImageUpload({
   const [files, setFiles] = React.useState<File[]>([]);
 
   return (
-    <div className="relative">
+    <div className="relative mb-4">
       <div tabIndex={0}>
-        {/* <Image
-          loading="lazy"
-          src={files.length > 0 ? URL.createObjectURL(files[0]) : ""}
-          alt={label}
-          width={300}
-          height={300}
-        /> */}
         <label
           className={styles.customFileUpload}
           style={{
@@ -57,7 +50,7 @@ export default function ImageUpload({
               }
             }}
           />
-          {files ? null : (
+          {files.length === 0 ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -72,7 +65,7 @@ export default function ImageUpload({
             >
               <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
             </svg>
-          )}
+          ) : null}
         </label>
         {isInvalid && (
           <p className="text-xs mt-1 text-red-400">{errorMessage}</p>
