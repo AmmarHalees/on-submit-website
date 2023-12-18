@@ -24,7 +24,7 @@ export default function UncontrolledForm() {
       className="
       p-4
       mx-auto 
-      my-8
+      md:my-8
       bg-gray-50
       rounded-md
       shadow-md
