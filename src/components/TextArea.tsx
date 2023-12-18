@@ -5,8 +5,8 @@ export default function TextArea({
   value,
   onChange,
   name,
-  type = "text",
   placeholder,
+  isInvalid,
 }: {
   label: string;
   value?: string;
@@ -14,6 +14,7 @@ export default function TextArea({
   name: string;
   type?: string;
   placeholder?: string;
+  isInvalid?: boolean;
 }) {
   return (
     <legend>
@@ -22,7 +23,9 @@ export default function TextArea({
       </label>
       <textarea
         readOnly
-        className="w-full p-2 border border-gray-300 rounded-md"
+        className={`w-full p-2 border ${
+          isInvalid ? "border-red-400" : "border-gray-200"
+        }   rounded-md`}
         name={name}
         value={value}
         onChange={onChange ? (e) => onChange(e.target.value) : undefined}

@@ -4,6 +4,8 @@ import React, { Component } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import TextArea from "./TextArea";
+import Select from "./Select";
+import ImageUpload from "./ImageUpload/ImageUpload";
 
 type Props = {
   onSubmit: (data: { name: string; email: string }) => void;
@@ -37,42 +39,51 @@ export default function UncontrolledForm() {
         onSubmit={handleOnsubmit}
       >
         <fieldset className="grid gap-2 p-4">
+          <ImageUpload label="Click here to upload" name="profilePicture" />
+
           <legend className="text-lg font-semibold text-gray-600">
             Personal Info
           </legend>
           <div className="grid gap-2 md:grid-cols-2">
-            <Input label="First Name" name="firstName" />
-            <Input label="Last Name" name="lastName" />
+            <Input label="First Name*" name="firstName" />
+            <Input label="Last Name*" name="lastName" />
           </div>
+          <Input
+            label="Portfolio"
+            name="portfolio"
+            placeholder="ex: https://clay.dev"
+            type="url"
+          />
           <TextArea label="Bio" name="bio" />
         </fieldset>
         <fieldset className="grid gap-2 p-4">
           <legend className="text-lg font-semibold text-gray-600">
             Contact Info
           </legend>
-          <Input label="Phone number" name="phoneNumber" placeholder="ex:" />
           <Input
-            label="Corporate email"
-            name="corporateEmail"
+            label="Phone number"
+            name="phone"
+            type="tel"
+            placeholder="ex:"
+          />
+          <Input
+            label="Corporate email*"
+            name="email"
             placeholder="ex: clay@whisker.com"
           />
         </fieldset>
 
         <fieldset className="grid gap-2 p-4">
           <legend className="text-lg font-semibold text-gray-600">
-            Additional Info
+            Work-related Info
           </legend>
-          <Input
-            label="Hobbies"
-            name="hobbies"
-            placeholder="ex: reading"
-            type="month"
-          />
-          <Input
-            label="Corporate email"
-            name="corporateEmail"
-            placeholder="ex: clay@whisker.com"
-          />
+
+          <div className="grid gap-2 md:grid-cols-2">
+            <Input label="Start hour" name="startHour" type="time" />
+            <Input label="End hour" name="endHour" type="time" />
+          </div>
+
+          <Select label="Speciality" name="speciality" />
         </fieldset>
         <Button type="submit">Submit</Button>
       </form>

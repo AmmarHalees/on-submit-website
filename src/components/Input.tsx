@@ -7,6 +7,8 @@ export default function Input({
   name,
   type = "text",
   placeholder,
+  isInvalid,
+  errorMessage,
 }: {
   label: string;
   value?: string;
@@ -14,6 +16,8 @@ export default function Input({
   name: string;
   type?: string;
   placeholder?: string;
+  isInvalid?: boolean;
+  errorMessage?: string;
 }) {
   return (
     <legend>
@@ -21,13 +25,16 @@ export default function Input({
         {label}
       </label>
       <input
-        className="w-full p-2 border border-gray-300 rounded-md"
+        className={`w-full p-2 border ${
+          isInvalid ? "border-red-400" : "border-gray-200"
+        }   rounded-md`}
         type={type}
         name={name}
         value={value}
         onChange={onChange ? (e) => onChange(e.target.value) : undefined}
         placeholder={placeholder}
       />
+      {isInvalid && <p className="text-xs mt-1 text-red-400">{errorMessage}</p>}
     </legend>
   );
 }

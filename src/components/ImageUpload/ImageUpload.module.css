@@ -1,0 +1,28 @@
+.customFileUpload {
+    height: 120px;
+    width: 120px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background: rgb(215, 215, 255);
+    fill: white;
+    margin: auto;
+    /* &:hover,
+    &:focus {
+      cursor: pointer;
+      background-color: var(--primary-darker-color);
+    } */
+  }
+
+.customFileUpload:hover, .customFileUpload:focus{
+    cursor: pointer;
+    background: rgb(189, 189, 255);
+}
+
+  .customFileUpload input[type="file"] {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}
+
