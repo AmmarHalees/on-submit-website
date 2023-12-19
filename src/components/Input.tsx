@@ -30,8 +30,6 @@ export default function Input({
         }   rounded-md`}
         type={type}
         name={name}
-        value={value}
-        onChange={onChange ? (e) => onChange(e.target.value) : undefined}
         placeholder={placeholder}
       />
       {isInvalid && <p className="text-xs mt-1 text-red-400">{errorMessage}</p>}

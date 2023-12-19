@@ -1,22 +1,39 @@
 // UncontrolledForm
 "use client";
 import React, { Component } from "react";
-import Input from "./Input";
-import Button from "./Button";
-import TextArea from "./TextArea";
-import Select from "./Select";
-import ImageUpload from "./ImageUpload/ImageUpload";
+import Input from "../Input";
+import Button from "../Button";
+import TextArea from "../TextArea";
+import Select from "../Select";
+import ImageUpload from "../ImageUpload/ImageUpload";
+import { validateField } from "onsubmit";
+import RulesMap from "./rules";
 
-type Props = {
-  onSubmit: (data: { name: string; email: string }) => void;
+type FieldError = {
+  name: string;
+  message: string;
 };
-
 export default function UncontrolledForm() {
+  const [errors, setErrors] = React.useState<Array<FieldError>>([]);
+
+  const validateForm = (data: any) => {
+    const errors: Array<FieldError> = [];
+
+    Object.entries(data).forEach(([key, value]) => {
+      errors.push(
+        ...validateField(value, key, RulesMap[key as keyof typeof RulesMap])
+      );
+    });
+    return errors;
+  };
+
   const handleOnsubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
-    console.log(data);
+    const data: { [key: string]: string | FormDataEntryValue } =
+      Object.fromEntries(formData);
+    const errors = validateForm(data);
+    console.log(errors);
   };
 
   return (
@@ -40,7 +57,7 @@ export default function UncontrolledForm() {
         onSubmit={handleOnsubmit}
       >
         <fieldset className="grid gap-2 p-4">
-          <ImageUpload label="Click here to upload" name="profilePicture" />
+          {/* <ImageUpload label="Click here to upload" name="profilePicture" /> */}
 
           <legend className="text-lg font-semibold text-gray-600">
             Personal Info

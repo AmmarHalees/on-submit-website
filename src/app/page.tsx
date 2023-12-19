@@ -1,4 +1,4 @@
-import UncontrolledForm from "@/components/UncontrolledForm";
+import UncontrolledForm from "@/components/UncontrolledForm/UncontrolledForm";
 
 export default function Home() {
   return (
