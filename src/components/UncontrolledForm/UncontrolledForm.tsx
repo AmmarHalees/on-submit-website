@@ -17,7 +17,11 @@ export default function UncontrolledForm() {
 
     Object.entries(data).forEach(([key, value]) => {
       errors.push(
-        ...validateField(value, key, RulesMap[key as keyof typeof RulesMap])
+        ...validateField(
+          value as string,
+          key,
+          RulesMap[key as keyof typeof RulesMap]
+        )
       );
     });
     return errors;
