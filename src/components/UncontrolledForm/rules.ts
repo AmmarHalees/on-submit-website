@@ -6,11 +6,11 @@ const RulesMap: NameRuleMap = {
       value: true,
       message: "First name is required",
     },
-    min: {
+    minLength: {
       value: 5,
       message: "First name must be at least 5 characters",
     },
-    max: {
+    maxLength: {
       value: 20,
       message: "First name must be at most 20 characters",
     },
@@ -24,11 +24,11 @@ const RulesMap: NameRuleMap = {
       value: true,
       message: "Last name is required",
     },
-    min: {
+    minLength: {
       value: 5,
       message: "Last name must be at least 5 characters",
     },
-    max: {
+    maxLength: {
       value: 20,
       message: "Last name must be at most 20 characters",
     },
@@ -40,7 +40,7 @@ const RulesMap: NameRuleMap = {
     },
   },
   bio: {
-    min: {
+    minLength: {
       value: 50,
       message: "Bio must be at least 50 characters",
     },
@@ -48,12 +48,12 @@ const RulesMap: NameRuleMap = {
       value: /^[a-zA-Z0-9_ ]*$/,
       message: "Bio must be a valid bio",
     },
-    max: {
+    maxLength: {
       value: 100,
       message: "Bio must be at most 100 characters",
     },
   },
-  phone: {
+  phoneNumber: {
     pattern: {
       value: /^\+?[0-9]{10,14}$/,
       message: "Phone number must be a valid phone number",
@@ -64,7 +64,7 @@ const RulesMap: NameRuleMap = {
       value: true,
       message: "Email is required",
     },
-    min: {
+    minLength: {
       value: 5,
       message: "Email must be at least 5 characters",
     },
