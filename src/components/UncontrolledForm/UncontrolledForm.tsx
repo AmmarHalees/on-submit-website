@@ -18,6 +18,7 @@ export default function UncontrolledForm() {
     Object.entries(data).forEach(([key, value]) => {
       errors.push(
         ...validateField(
+          // TODO : remove
           value as string,
           key,
           RulesMap[key as keyof typeof RulesMap]
