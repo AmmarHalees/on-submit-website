@@ -5,36 +5,24 @@ import Input from "../Input";
 import Button from "../Button";
 import TextArea from "../TextArea";
 import Select from "../Select";
-import { FieldError, validateField } from "onsubmit";
+import {
+  FieldError,
+  FormDataObject,
+  validateField,
+  validateForm,
+} from "onsubmit";
 import RulesMap from "./rules";
 import { useDebouncedCallback } from "use-debounce";
 
 export default function UncontrolledForm() {
   const [errors, setErrors] = React.useState<Array<FieldError>>([]);
 
-  const validateForm = (data: any) => {
-    const errors: Array<FieldError> = [];
-
-    Object.entries(data).forEach(([key, value]) => {
-      errors.push(
-        ...validateField(
-          // TODO : remove
-          value as string,
-          key,
-          RulesMap[key as keyof typeof RulesMap]
-        )
-      );
-    });
-    return errors;
-  };
-
   // for form-level validation
   const handleOnsubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data: { [key: string]: string | FormDataEntryValue } =
-      Object.fromEntries(formData);
-    const errors = validateForm(data);
+    const data = Object.fromEntries(formData);
+    const errors = validateForm(data as FormDataObject, RulesMap);
     setErrors(errors);
   };
 
