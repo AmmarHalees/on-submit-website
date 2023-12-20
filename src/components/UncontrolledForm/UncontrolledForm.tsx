@@ -1,18 +1,14 @@
 // UncontrolledForm
 "use client";
-import React, { Component } from "react";
+import React from "react";
 import Input from "../Input";
 import Button from "../Button";
 import TextArea from "../TextArea";
 import Select from "../Select";
-import ImageUpload from "../ImageUpload/ImageUpload";
-import { validateField } from "onsubmit";
+import { FieldError, validateField } from "onsubmit";
 import RulesMap from "./rules";
+import { useDebouncedCallback } from "use-debounce";
 
-type FieldError = {
-  name: string;
-  message: string;
-};
 export default function UncontrolledForm() {
   const [errors, setErrors] = React.useState<Array<FieldError>>([]);
 
@@ -27,14 +23,40 @@ export default function UncontrolledForm() {
     return errors;
   };
 
+  // for form-level validation
   const handleOnsubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data: { [key: string]: string | FormDataEntryValue } =
       Object.fromEntries(formData);
     const errors = validateForm(data);
-    console.log(errors);
+    setErrors(errors);
   };
+
+  // for per-field validation
+  const handleOnchange = useDebouncedCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      const errors = validateField(
+        value,
+        name,
+        RulesMap[name as keyof typeof RulesMap]
+      );
+
+      setErrors((prev) => prev.filter((x) => x.name !== name).concat(errors));
+    },
+    300
+  );
+
+  const getInputParams = (name = "firstName", type = "text") => ({
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+      handleOnchange(e);
+    },
+    isInvalid: !!errors.find((x) => x.name === name),
+    errorMessage: errors.find((x) => x.name === name)?.message,
+    name,
+    type,
+  });
 
   return (
     <div
@@ -63,14 +85,13 @@ export default function UncontrolledForm() {
             Personal Info
           </legend>
           <div className="grid gap-2 md:grid-cols-2">
-            <Input label="First Name*" name="firstName" />
-            <Input label="Last Name*" name="lastName" />
+            <Input label="First Name*" {...getInputParams("firstName")} />
+            <Input label="Last Name*" {...getInputParams("lastName")} />
           </div>
           <Input
             label="Portfolio"
-            name="portfolio"
             placeholder="ex: https://clay.dev"
-            type="url"
+            {...getInputParams("portfolio", "url")}
           />
           <TextArea label="Bio" name="bio" />
         </fieldset>
@@ -80,14 +101,13 @@ export default function UncontrolledForm() {
           </legend>
           <Input
             label="Phone number"
-            name="phone"
-            type="tel"
             placeholder="ex:"
+            {...getInputParams("phoneNumber", "tell")}
           />
           <Input
             label="Corporate email*"
-            name="email"
             placeholder="ex: clay@whisker.com"
+            {...getInputParams("email", "email")}
           />
         </fieldset>
 
@@ -97,8 +117,26 @@ export default function UncontrolledForm() {
           </legend>
 
           <div className="grid gap-2 md:grid-cols-2">
-            <Input label="Start hour" name="startHour" type="time" />
-            <Input label="End hour" name="endHour" type="time" />
+            <Input
+              label="Start hour"
+              name="startHour"
+              type="time"
+              isInvalid={!!errors.find((x) => x.name === "startHour")}
+              errorMessage={errors.find((x) => x.name === "startHour")?.message}
+              onChange={(e) => {
+                handleOnchange(e);
+              }}
+            />
+            <Input
+              label="End hour"
+              name="endHour"
+              type="time"
+              isInvalid={!!errors.find((x) => x.name === "endHour")}
+              errorMessage={errors.find((x) => x.name === "endHour")?.message}
+              onChange={(e) => {
+                handleOnchange(e);
+              }}
+            />
           </div>
 
           <Select label="Speciality" name="speciality" />

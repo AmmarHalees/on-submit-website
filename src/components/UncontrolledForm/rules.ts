@@ -1,16 +1,22 @@
-const RulesMap = {
+import { NameRuleMap } from "onsubmit";
+
+const RulesMap: NameRuleMap = {
   firstName: {
     required: {
       value: true,
       message: "First name is required",
     },
     min: {
-      value: 2,
-      message: "First name must be at least 2 characters",
+      value: 5,
+      message: "First name must be at least 5 characters",
     },
     max: {
       value: 20,
       message: "First name must be at most 20 characters",
+    },
+    pattern: {
+      value: /^[a-zA-Z0-9_ ]*$/,
+      message: "First name must be a valid name",
     },
   },
   lastName: {
@@ -19,8 +25,8 @@ const RulesMap = {
       message: "Last name is required",
     },
     min: {
-      value: 2,
-      message: "Last name must be at least 2 characters",
+      value: 5,
+      message: "Last name must be at least 5 characters",
     },
     max: {
       value: 20,
@@ -69,12 +75,20 @@ const RulesMap = {
     },
   },
   startHour: {
+    required: {
+      value: true,
+      message: "Start hour is required",
+    },
     pattern: {
       value: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
       message: "Start hour must be a valid hour",
     },
   },
   endHour: {
+    required: {
+      value: true,
+      message: "End hour is required",
+    },
     pattern: {
       value: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
       message: "End hour must be a valid hour",

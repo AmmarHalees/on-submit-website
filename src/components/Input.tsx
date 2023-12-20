@@ -12,12 +12,12 @@ export default function Input({
 }: {
   label: string;
   value?: string;
-  onChange?: (value: string) => void;
   name: string;
   type?: string;
   placeholder?: string;
   isInvalid?: boolean;
   errorMessage?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <legend>
@@ -31,6 +31,7 @@ export default function Input({
         type={type}
         name={name}
         placeholder={placeholder}
+        onChange={onChange}
       />
       {isInvalid && <p className="text-xs mt-1 text-red-400">{errorMessage}</p>}
     </legend>
