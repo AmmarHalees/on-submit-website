@@ -22,7 +22,7 @@ export default function UncontrolledForm() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    const errors = validateForm(data as FormDataObject, RulesMap);
+    const errors = validateForm(data, RulesMap);
     setErrors(errors);
   };
 
