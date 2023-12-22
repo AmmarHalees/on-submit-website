@@ -5,14 +5,10 @@ import Input from "../Input";
 import Button from "../Button";
 import TextArea from "../TextArea";
 import Select from "../Select";
-import {
-  FieldError,
-  FormDataObject,
-  validateField,
-  validateForm,
-} from "onsubmit";
+import { validateField, validateForm } from "onsubmit";
 import RulesMap from "./rules";
 import { useDebouncedCallback } from "use-debounce";
+import { FieldError, FormDataObject } from "onsubmit/types";
 
 export default function UncontrolledForm() {
   const [errors, setErrors] = React.useState<Array<FieldError>>([]);
@@ -22,7 +18,15 @@ export default function UncontrolledForm() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    const errors = validateForm(data, RulesMap);
+    const mydata = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      portfolio: data.portfolio,
+      bio: data.bio,
+      phoneNumber: data.phoneNumber,
+      email: data.email,
+    } as FormDataObject;
+    const errors = validateForm(mydata, RulesMap);
     setErrors(errors);
   };
 
@@ -103,7 +107,6 @@ export default function UncontrolledForm() {
             {...getInputParams("email", "email")}
           />
         </fieldset>
-
         <fieldset className="grid gap-2 p-4">
           <legend className="text-lg font-semibold text-gray-600">
             Work-related Info
@@ -134,6 +137,24 @@ export default function UncontrolledForm() {
 
           <Select label="Speciality" name="speciality" />
         </fieldset>
+        <fieldset className="grid gap-2 p-4">
+          <legend className="text-lg font-semibold text-gray-600">
+            Privacy
+          </legend>
+          <Input
+            label="Public profile"
+            name="isPublicProfile"
+            type="checkbox"
+            isInvalid={!!errors.find((x) => x.name === "isPublicProfile")}
+            errorMessage={
+              errors.find((x) => x.name === "isPublicProfile")?.message
+            }
+            onChange={(e) => {
+              handleOnchange(e);
+            }}
+          />
+        </fieldset>
+
         <div className="grid gap-2 grid-cols-[1fr_2fr]">
           <Button type="reset" variant="secondary">
             Reset
