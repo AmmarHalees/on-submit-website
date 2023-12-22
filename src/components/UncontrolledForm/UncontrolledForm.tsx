@@ -8,7 +8,7 @@ import Select from "../Select";
 import { validateField, validateForm } from "onsubmit";
 import RulesMap from "./rules";
 import { useDebouncedCallback } from "use-debounce";
-import { FieldError, FormDataObject } from "onsubmit/types";
+import { FieldError } from "onsubmit/types";
 
 export default function UncontrolledForm() {
   const [errors, setErrors] = React.useState<Array<FieldError>>([]);
@@ -18,15 +18,10 @@ export default function UncontrolledForm() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    const mydata = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      portfolio: data.portfolio,
-      bio: data.bio,
-      phoneNumber: data.phoneNumber,
-      email: data.email,
-    } as FormDataObject;
-    const errors = validateForm(mydata, RulesMap);
+
+    const errors = validateForm(data, RulesMap);
+
+    console.log(errors);
     setErrors(errors);
   };
 

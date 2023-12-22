@@ -1,108 +1,108 @@
-import { NameRuleMap } from "onsubmit";
+import { NameRuleMap } from "onsubmit/types";
 
 const RulesMap: NameRuleMap = {
   firstName: {
     required: {
-      value: true,
+      criterion: true,
       message: "First name is required",
     },
     minLength: {
-      value: 5,
+      criterion: 5,
       message: "First name must be at least 5 characters",
     },
     maxLength: {
-      value: 20,
+      criterion: 20,
       message: "First name must be at most 20 characters",
     },
     pattern: {
-      value: /^[a-zA-Z0-9_ ]*$/,
+      criterion: /^[a-zA-Z0-9_ ]*$/,
       message: "First name must be a valid name",
     },
   },
   lastName: {
     required: {
-      value: true,
+      criterion: true,
       message: "Last name is required",
     },
     minLength: {
-      value: 5,
+      criterion: 5,
       message: "Last name must be at least 5 characters",
     },
     maxLength: {
-      value: 20,
+      criterion: 20,
       message: "Last name must be at most 20 characters",
     },
   },
   portfolio: {
     pattern: {
-      value: /^https?:\/\/[\w-]+(\.[\w-]+)+[/#?]?.*$/,
+      criterion: /^https?:\/\/[\w-]+(\.[\w-]+)+[/#?]?.*$/,
       message: "Portfolio must be a valid URL",
     },
   },
   bio: {
     minLength: {
-      value: 50,
+      criterion: 50,
       message: "Bio must be at least 50 characters",
     },
     pattern: {
-      value: /^[a-zA-Z0-9_ ]*$/,
+      criterion: /^[a-zA-Z0-9_ ]*$/,
       message: "Bio must be a valid bio",
     },
     maxLength: {
-      value: 100,
+      criterion: 100,
       message: "Bio must be at most 100 characters",
     },
   },
   phoneNumber: {
     pattern: {
-      value: /^\+?[0-9]{10,14}$/,
+      criterion: /^\+?[0-9]{10,14}$/,
       message: "Phone number must be a valid phone number",
     },
   },
   email: {
     required: {
-      value: true,
+      criterion: true,
       message: "Email is required",
     },
     minLength: {
-      value: 5,
+      criterion: 5,
       message: "Email must be at least 5 characters",
     },
 
     pattern: {
-      value: /^\S+@\S+\.\S+$/,
+      criterion: /^\S+@\S+\.\S+$/,
       message: "Email must be a valid email",
     },
   },
   startHour: {
     required: {
-      value: true,
+      criterion: true,
       message: "Start hour is required",
     },
     pattern: {
-      value: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
+      criterion: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
       message: "Start hour must be a valid hour",
     },
   },
   endHour: {
     required: {
-      value: true,
+      criterion: true,
       message: "End hour is required",
     },
     pattern: {
-      value: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
+      criterion: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
       message: "End hour must be a valid hour",
     },
   },
   speciality: {
     required: {
-      value: true,
+      criterion: true,
       message: "Speciality is required",
     },
   },
   //   profilePicture: {
   //     required: {
-  //       value: true,
+  //       criterion: true,
   //       message: "Profile picture is required",
   //     },
   //   },
