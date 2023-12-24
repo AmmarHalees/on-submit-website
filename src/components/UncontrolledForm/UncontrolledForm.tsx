@@ -18,11 +18,7 @@ export default function UncontrolledForm() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-
     const errors = validateForm(data, RulesMap);
-
-    console.log(errors);
-
     setErrors(errors);
   };
 
@@ -33,7 +29,7 @@ export default function UncontrolledForm() {
       const errors = validateField(
         value,
         name,
-        RulesMap[name as keyof typeof RulesMap]
+        RulesMap[name]
       );
 
       setErrors((prev) => prev.filter((x) => x.name !== name).concat(errors));
@@ -133,14 +129,16 @@ export default function UncontrolledForm() {
 
           <Select label="Speciality" name="speciality" />
         </fieldset>
-        <fieldset className="grid gap-2 p-4">
+        {/* <fieldset className="grid gap-2 p-4">
           <legend className="text-lg font-semibold text-gray-600">
             Privacy
           </legend>
+
           <Input
             label="Public profile"
             name="isPublicProfile"
             type="checkbox"
+            classes="mt-2 block w-fit"
             isInvalid={!!errors.find((x) => x.name === "isPublicProfile")}
             errorMessage={
               errors.find((x) => x.name === "isPublicProfile")?.message
@@ -149,7 +147,7 @@ export default function UncontrolledForm() {
               handleOnchange(e);
             }}
           />
-        </fieldset>
+        </fieldset> */}
 
         <div className="grid gap-2 grid-cols-[1fr_2fr]">
           <Button type="reset" variant="secondary">

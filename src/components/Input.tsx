@@ -9,6 +9,7 @@ export default function Input({
   placeholder,
   isInvalid,
   errorMessage,
+  classes,
 }: {
   label: string;
   value?: string;
@@ -18,6 +19,7 @@ export default function Input({
   isInvalid?: boolean;
   errorMessage?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  classes?: string;
 }) {
   return (
     <legend>
@@ -27,7 +29,7 @@ export default function Input({
       <input
         className={`w-full p-2 border ${
           isInvalid ? "border-red-400" : "border-gray-200"
-        }   rounded-md`}
+        }  ${classes} rounded-md`}
         type={type}
         name={name}
         placeholder={placeholder}
