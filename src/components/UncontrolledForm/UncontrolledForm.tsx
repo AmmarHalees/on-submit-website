@@ -22,6 +22,7 @@ export default function UncontrolledForm() {
     const errors = validateForm(data, RulesMap);
 
     console.log(errors);
+
     setErrors(errors);
   };
 

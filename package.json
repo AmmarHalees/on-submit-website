@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^14.0.4",
     "next": "14.0.4",
-    "onsubmit": "^0.0.14",
+    "onsubmit": "^0.0.15",
     "react": "^18",
     "react-dom": "^18",
     "use-debounce": "^10.0.0"
