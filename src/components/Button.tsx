@@ -8,7 +8,7 @@ export default function Button({
   variant = "primary",
 }: {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit" | "reset";
   className?: string;
   variant?: "primary" | "secondary";
