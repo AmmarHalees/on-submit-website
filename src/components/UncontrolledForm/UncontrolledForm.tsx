@@ -20,33 +20,6 @@ export default function UncontrolledForm() {
   const [errors, setErrors] = React.useState<Array<FieldError>>([]);
   const [isDevMode, setIsDevMode] = React.useState(true);
   const [currentRules, setCurrentRules] = useState<NameRuleMap>(initialRules);
-  const [jsonError, setJsonError] = useState(false);
-
-  function reviveRegex(obj) {
-    for (const key in obj) {
-      if (typeof obj[key] === "string" && obj[key].startsWith("/")) {
-        const match = obj[key].match(/^\/(.+)\/([gimuy]*)$/);
-        if (match) {
-          obj[key] = new RegExp(match[1], match[2]);
-        }
-      } else if (typeof obj[key] === "object") {
-        reviveRegex(obj[key]);
-      }
-    }
-  }
-
-  const handleChange = (e) => {
-    try {
-      const parsed = JSON.parse(e.target.value);
-      reviveRegex(parsed); // Convert string representations back to RegExp
-      setCurrentRules(parsed);
-      setJsonError(false);
-    } catch (error) {
-      setJsonError(true);
-    }
-  };
-
-  console.log(currentRules);
 
   // for form-level validation
   const handleOnsubmit = (e: React.FormEvent<HTMLFormElement>) => {
